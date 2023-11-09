@@ -1,0 +1,26 @@
+{
+  "env": "dev",
+  "db": {
+    "user": "root",
+    "password": "test",
+    "name": "mvp24jun",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "log": {
+    "level": "debug",
+    "debugNamespaces": "",
+    "outputs": {
+      "std": {
+        "active": false
+      },
+      "error": {
+        "active": false
+      },
+      "console": {
+        "active": true,
+        "handleExceptions": true
+      }
+    }
+  }
+}

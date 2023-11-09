@@ -1,0 +1,28 @@
+{
+  "env": "host",
+  "db": {
+    "user": "root",
+    "password": "VimNanNewTh91",
+    "name": "mvp2",
+    "host": "172.31.42.162",
+    "dialect": "mysql"
+  },
+  "log": {
+    "level": "info",
+    "debugNamespaces": "",
+    "outputs": {
+      "std": {
+        "active": true,
+        "path": "/var/log/valueinfinity-mvp/std.host.log"
+      },
+      "error": {
+        "active": true,
+        "path": "/var/log/valueinfinity-mvp/err.host.log"
+      },
+      "console": {
+        "active": true,
+        "handleExceptions": true
+      }
+    }
+  }
+}
