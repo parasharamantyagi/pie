@@ -71,8 +71,8 @@ export default props => (
         <Route exact path="/about" component={About} />
         <Route exact path="/" component={Login} />
         <Route exact path="/userinfo" component={UserInfo} />
-        <Route exact path="/clientorg" component={withAuth(ClientOrg)} />
-        <Route exact path="/analytics" component={withAuth(Analytics)} />
+        <Route exact path="/clientorg" component={ClientOrg} />
+        <Route exact path="/analytics" component={Analytics} />
         <Route exact path="/project" component={withAuth(Project)} />
         <Route exact path="/department" component={withAuth(Department)} />
         <Route path="/mindmap/:id" component={withAuth(MindMap)} />

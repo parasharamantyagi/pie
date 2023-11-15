@@ -131,7 +131,7 @@ class ClientOrg extends React.Component {
       });
     }
 
-    fetch("/api/organizations/?format=select")
+    fetch("http://54.202.120.56:7000/api/organizations/?format=select")
       .then(results => results.json())
       .then(organizations => {
         organizations.unshift({id:0,name:'Select Organization'})
