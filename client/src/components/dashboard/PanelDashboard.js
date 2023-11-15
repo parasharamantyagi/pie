@@ -14,15 +14,12 @@ import CssBaseline from "@material-ui/core/CssBaseline/index";
 import Topbar from "../Topbar";
 import Grid from "@material-ui/core/Grid/index";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Typography from "@material-ui/core/Typography/index";
 import { Redirect } from "react-router-dom";
-import { getOrgName, getOrgId } from "../../redux";
+import { getOrgName } from "../../redux";
 import DashboardFilter from "./DashboardFilter";
 import ProjectPanelList from "./ProjectPanelList";
 import { styles } from "../styles/DashboardStyles";
 import PageTitle from "../PageTitle";
-import OrganizationActionTable from "./OrganizationActionTable";
-import OrganizationDocumentTable from "./OrganizationDocumentTable";
 
 class PanelDashboard extends Component {
   constructor(props) {
@@ -48,7 +45,7 @@ class PanelDashboard extends Component {
   componentDidCatch(error, info) {
     console.log("error: " + error + ", info: " + info);
     this.setState({hasError: true});
-    return <Redirect to="/Login" />;
+    // return <Redirect to="/Login" />;
   };
 
   componentDidMount() {

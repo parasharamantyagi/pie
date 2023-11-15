@@ -105,7 +105,7 @@ class ProjectPanelList extends Component {
   componentDidCatch(error, info) {
     console.log("error: " + error + ", info: " + info);
     this.setState({hasError: true});
-    return <Redirect to="/Login" />;
+    // return <Redirect to="/Login" />;
   }
 
   fetchProjects = () => {

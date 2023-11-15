@@ -527,7 +527,7 @@ class TestProject extends React.Component {
   }
 
   componentDidCatch() {
-    return <Redirect to="/Login" />;
+    // return <Redirect to="/Login" />;
   }
 
   render() {

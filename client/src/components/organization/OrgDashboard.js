@@ -190,7 +190,7 @@ class OrgDashboard extends Component {
   componentDidCatch(error, info) {
     console.log("error: " + error + ", info: " + info);
     this.setState({hasError: true});
-    return <Redirect to="/Login" />;
+    // return <Redirect to="/Login" />;
   };
 
   handleNull(refToParse) {
@@ -206,7 +206,7 @@ class OrgDashboard extends Component {
   }
 
   componentDidMount() {
-    fetch("/api/organizations-dashboard")
+    fetch("http://54.202.120.56:7000/api/organizations-dashboard")
       .then(res => {
         this.setState({skeletonLoader:false})
         return res.json();

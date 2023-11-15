@@ -58,7 +58,7 @@ export default props => (
         <Route exact path="/dashboard" component={withAuth(ProjectDashboard)} />
         <Route exact path="/analytics-dashboard" component={withAuth(AnalyticsDashboard)} />
         <Route exact path="/paneldashboard" component={withAuth(PanelDashboard)} />
-        <Route exact path="/orgdashboard" component={withAuth(OrgDashboard)} />
+        <Route exact path="/orgdashboard" component={OrgDashboard} />
         <Route exact path="/highlight" component={withAuth(HighlightDashboard)} />
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/login" component={Login} />
@@ -66,7 +66,7 @@ export default props => (
         <Route exact path="/mindmap" component={MindMap} />
         <Route exact path="/resetpassword" component={RestPassword} />
         <Route exact path="/password" component={withAuth(ChangePassword)} />
-        <Route exact path="/search" component={withAuth(Search)} />
+        <Route exact path="/search" component={Search} />
         <Route exact path="/gantt" component={Gantt} />
         <Route exact path="/about" component={About} />
         <Route exact path="/" component={Login} />
@@ -109,7 +109,7 @@ export default props => (
         <Route exact path="/OrganizationDocumentUpdate" component={withAuth(OrganizationDocumentUpdate)} />
 
         
-        <Route exact path="/organizationactions" component={withAuth(OrganizationActionTable)} />
+        <Route exact path="/organizationactions" component={OrganizationActionTable} />
         <Route exact path="/OrganizationAction/:id" component={withAuth(OrganizationAction)} />
         <Route exact path="/OrganizationAction" component={withAuth(OrganizationAction)} />
 

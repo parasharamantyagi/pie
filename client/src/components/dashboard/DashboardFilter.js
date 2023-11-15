@@ -108,7 +108,7 @@ class DashboardFilter extends Component {
 
   componentDidMount() {
     // Get the organization from the filter.
-    let fetchUrl = "/api/projects-years";
+    let fetchUrl = "http://54.202.120.56:7000/api/projects-years";
     if (!this.props.allClients) {
       fetchUrl += "/" + getOrgId();
     }

@@ -161,7 +161,7 @@ class MindmapList extends Component {
 
   componentDidCatch(error, info) {
     this.setState({ hasError: true });
-    return <Redirect to="/Login" />;
+    // return <Redirect to="/Login" />;
   };
 
   componentDidMount() {
@@ -319,7 +319,7 @@ class MindmapList extends Component {
     const currentPath = this.props.location.pathname;
 
     if (this.state.hasError) {
-      return <Redirect to="/Login" />;
+      // return <Redirect to="/Login" />;
     }
 
 // console.log('mindmaps-',mindmaps);

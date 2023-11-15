@@ -152,7 +152,7 @@ class SearchResults extends React.Component {
     // Search against our fulltext index.
     const orgId = getOrgId();
     if (searchString !== "" && searchString !== this.state.lastSearchString) {
-      fetch("/api/ft-search", {
+      fetch("http://54.202.120.56:7000/api/ft-search", {
         method: "GET",
         headers: new Headers({
           term: searchString,

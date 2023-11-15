@@ -157,7 +157,7 @@ class OrganizationActionTable extends React.Component {
     this.setState({persons,filterDate,orgId});
 
     
-    let uri=`/api/action-organization/${orgId}/${moment(filterDate).format("YYYY-MM-DD")}`;
+    let uri=`http://54.202.120.56:7000/api/action-organization/${orgId}/${moment(filterDate).format("YYYY-MM-DD")}`;
    
     fetch(uri)
     .then(res => res.json())

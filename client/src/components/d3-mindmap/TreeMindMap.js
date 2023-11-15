@@ -1068,7 +1068,7 @@ class TreeMindMap extends React.Component {
   componentDidCatch(error, info) {
     //console.log("error: " + error + ", info: " + info);
     this.setState({hasError: true});
-    return <Redirect to="/Login" />;
+    // return <Redirect to="/Login" />;
   };
 
   componentDidMount() {
@@ -1119,7 +1119,7 @@ class TreeMindMap extends React.Component {
   render() {
     const { classes } = this.props;
     if (this.state.hasError) {
-      return <Redirect to="/Login" />;
+      // return <Redirect to="/Login" />;
     }
     const h = Math.abs(window.innerHeight*0.10);
     const w = window.innerWidth;

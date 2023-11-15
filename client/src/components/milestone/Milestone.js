@@ -218,7 +218,7 @@ class Milestone extends React.Component {
   componentDidCatch(error, info) {
     console.log("error: " + error + ", info: " + info);
     this.setState({hasError: true});
-    return <Redirect to="/Login" />;
+    // return <Redirect to="/Login" />;
   };
 
   handleSubmit(event) {
