@@ -1,5 +1,5 @@
-const api = "http://localhost:7000";
-// const api = 'http://54.202.120.56:7000';
+// const api = "http://localhost:7000";
+const api = 'http://54.202.120.56:7000';
 
 module.exports = {
   API_BASE_URL: api,
