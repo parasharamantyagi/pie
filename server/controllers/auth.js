@@ -106,7 +106,13 @@ module.exports = {
               if(data && data.length>0){
                 p.dataValues.acls=data[0].jsonData[p.role];
               }
-              res.cookie(cookieName, token, { httpOnly: true }).status(200).json(p);
+              res.cookie(cookieName, token, { httpOnly: true }).status(200).json({
+                auth: true,
+                success: true,
+                token: token,
+                message: ""
+              });
+              // res.cookie(cookieName, token, { httpOnly: true }).status(200).json(p);
             })
             .catch(error => {
               logger.error(`${mvcType} getAcl -> error: ${error.stack}`);
@@ -152,8 +158,8 @@ module.exports = {
         req.body.token ||
         req.params.token ||
         req.headers["X-Access-Token"] ||
-        req.headers["Authorization"];
-
+        req.headers["Authorization"] ||
+        req.headers["authorization"];
     logger.debug(`${mvcType} validateToken -> token = ${token}`);
 
     var _code = 403;

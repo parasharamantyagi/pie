@@ -114,7 +114,6 @@ class Login extends React.Component {
       })
       .then((user) => {
         // Use Redux to save the user information.
-        console.log('22222',user.organization);
         store.dispatch(setUser(JSON.stringify(user)));
         // Initialize project filters for the Redux store.
         let status = [];

@@ -10,9 +10,8 @@
  * Editor:   Brad Kaufman
  */
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import Log from "../util/Log";
 import {setUser, store} from "../redux";
+import { API_BASE_URL } from "../config/apiUrl";
 
 export default function withAuth(ComponentToProtect) {
   return class extends Component {
@@ -25,7 +24,7 @@ export default function withAuth(ComponentToProtect) {
     }
 
     componentDidMount() {
-      fetch("/api/auth/validate")
+      fetch(API_BASE_URL + "/api/auth/validate")
         .then(res => {
           if (res.status !== 200) {
             this.redirectToLogin();
@@ -42,7 +41,7 @@ export default function withAuth(ComponentToProtect) {
         store.dispatch(setUser(JSON.stringify("")));
         localStorage.clear();
         sessionStorage.clear();
-        window.location.assign('/?returnUrl='+window.location.pathname)
+        // window.location.assign('/?returnUrl='+window.location.pathname)
       }
     }
     render() {
