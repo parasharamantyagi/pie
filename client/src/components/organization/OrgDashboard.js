@@ -37,6 +37,7 @@ import { connect } from "react-redux";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import AddUserIcon from "@material-ui/icons/PersonAdd";
+import { ORGANIZATION_DASHBOARD_API_URL } from "../../config/apiUrl";
 
 
 const rows = [
@@ -206,7 +207,7 @@ class OrgDashboard extends Component {
   }
 
   componentDidMount() {
-    fetch("http://54.202.120.56:7000/api/organizations-dashboard")
+    fetch(ORGANIZATION_DASHBOARD_API_URL)
       .then(res => {
         this.setState({skeletonLoader:false})
         return res.json();

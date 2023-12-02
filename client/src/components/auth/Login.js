@@ -11,11 +11,9 @@
  */
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
-import withStyles from "@material-ui/core/styles/withStyles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Topbar from "../Topbar";
-import { styles } from "../styles/MaterialSense";
 import Card from "@material-ui/core/Card/index";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid/index";
@@ -33,6 +31,7 @@ import {
 } from "../../redux";
 
 import "./Login.css";
+import { LOGIN_API_URL } from "../../config/apiUrl";
 
 class Login extends React.Component {
   // Note that I'll need the individual fields for handleChange.  Use state to manage the inputs for the various
@@ -87,7 +86,7 @@ class Login extends React.Component {
     let redirectTarget = "";
     this.setState({ disableButton: true });
     // Authenticate against the username
-    fetch("http://54.202.120.56:7000/api/auth/authenticate", {
+    fetch(LOGIN_API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(this.state),
@@ -110,12 +109,12 @@ class Login extends React.Component {
           throw new Error("Network response was not ok.");
         } else {
           // status code 200 is success.
-          console.log("Login.js, logged in. Status = 200");
           return response.json();
         }
       })
       .then((user) => {
         // Use Redux to save the user information.
+        console.log('22222',user.organization);
         store.dispatch(setUser(JSON.stringify(user)));
         // Initialize project filters for the Redux store.
         let status = [];
@@ -123,19 +122,12 @@ class Login extends React.Component {
         let endYear = [];
         let filters = { status, startYear, endYear };
         store.dispatch(setProjectListFilter(filters));
-
-        console.log("Login.js, user:" + JSON.stringify(""));
-        if (!isAdministrator()) {
+        if (user.organization) {
           store.dispatch(setOrg(JSON.stringify(user.organization)));
-          console.log(
-            "Login.js, non-admin, organization:" +
-              JSON.stringify(user).organization
-          );
         }
       })
       .then(() => {
-        console.log("Ready to redirect");
-        redirectTarget = "/about";
+        redirectTarget = "/analytics-dashboard";
         this.setState({
           isUserLoggedIn: true,
           readyToRedirect: true,
@@ -298,9 +290,8 @@ class Login extends React.Component {
           redirectTarget = "/about";
         }
       } else {
-        redirectTarget = "/about";
+        redirectTarget = "/analytics-dashboard";
       }
-      console.log("redirectTarget redirectTarget ------>> ", redirectTarget);
       this.setState({
         isUserLoggedIn: true,
         readyToRedirect: true,

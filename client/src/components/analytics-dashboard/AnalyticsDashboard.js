@@ -4,7 +4,6 @@ import Topbar from "../Topbar";
 import Grid from "@material-ui/core/Grid/index";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography/index";
-import { Redirect } from "react-router-dom";
 import { getOrgName, getOrgId } from "../../redux";
 import { styles } from "../styles/DashboardStyles";
 import PageTitle from "../PageTitle";
@@ -16,6 +15,7 @@ import ActionWidget from "./widgets/ActionWidget";
 import ActionNewVsCloseWidget from "./widgets/ActionNewVsCloseWidget";
 import MileStonePriorityWidget from "./widgets/MileStonePriorityWidget";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { ORGANIZATION_PROJECT_STATUS_API_URL } from "../../config/apiUrl";
 
 class AnalyticsDashboard extends Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class AnalyticsDashboard extends Component {
     const orgName= getOrgName();
     this.setState({orgId,orgName});
 
-    const res = await fetch(`/api/orgnization-project-status/${orgId}`);
+    const res = await fetch(`${ORGANIZATION_PROJECT_STATUS_API_URL}${orgId}`);
     const orgProjectStatus = await res.json();
     this.setState({orgProjectStatus});
 

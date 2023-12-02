@@ -28,6 +28,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { setOrg, store } from "../../redux";
 import Snackbar from "@material-ui/core/Snackbar";
+import { ORGANIZATION_SELECT_API_URL } from "../../config/apiUrl";
 
 const redirectComponent = "/mindmaplist";
 
@@ -40,111 +41,124 @@ class ClientOrg extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       id: "",
-      organizations: [{id:0,name:'Select Organization'}],
+      organizations: [{ id: 0, name: "Select Organization" }],
       org: "",
       orgId: 0,
       expanded: false,
       readyToRedirect: false,
       labelWidth: 0,
       msgText: "",
-      disableButton:false,
+      disableButton: false,
       openSnackbar: false,
       message: "",
-      openDialog : false,
-      deletemindMapId:''
+      openDialog: false,
+      deletemindMapId: "",
     };
   }
 
-  handleChange = name => event => {
+  handleChange = (name) => (event) => {
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value,
     });
   };
 
-  handleSelectChange = event => {
+  handleSelectChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
   handleExpandClick = () => {
-    this.setState(state => ({ expanded: !state.expanded }));
+    this.setState((state) => ({ expanded: !state.expanded }));
   };
 
-  enableButton = ()=>{
+  enableButton = () => {
     setTimeout(() => {
       this.setState({ disableButton: false });
-    },1500099);
-  }
+    }, 1500099);
+  };
 
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({ disableButton: true,openSnackbar: true,
-      message: 'Please wait...' });
-      this.enableButton();
+    this.setState({
+      disableButton: true,
+      openSnackbar: true,
+      message: "Please wait...",
+    });
+    this.enableButton();
 
     let orgId = this.state.orgId;
     // Fetch the organization selected.
     fetch("/api/organizations/" + orgId)
-      .then(response => {
-       console.log('response--',response);
+      .then((response) => {
+        console.log("response--", response);
         if (response.ok) {
-          this.setState({ 
+          this.setState({
             openSnackbar: true,
-            message: 'Please wait...' });
-          
+            message: "Please wait...",
+          });
+
           // status code 200 is success.
           console.log("ClientOrg.js, org selected. Status = 200");
           return response.json();
         } else {
-          this.setState({ disableButton: false,
+          this.setState({
+            disableButton: false,
             openSnackbar: true,
-            message: "Something went wrong." });
+            message: "Something went wrong.",
+          });
           // alert(response.statusText);
           // here, we get out of the then handlers and
           // over to the catch handler
           throw new Error("Network response was not ok.");
         }
       })
-      .then(orgData => {
+      .then((orgData) => {
         // console.log('then 2', orgData);
         this.setState({ disableButton: false });
         store.dispatch(setOrg(JSON.stringify(orgData)));
       })
-      .then(response => {
+      .then((response) => {
         // console.log('then 3');
-        this.setState({ readyToRedirect: true, disableButton:false,openSnackbar: true,
-          message: 'Organization set Successfully.' });
+        this.setState({
+          readyToRedirect: true,
+          disableButton: false,
+          openSnackbar: true,
+          message: "Organization set Successfully.",
+        });
       })
-      .catch(err => {
+      .catch((err) => {
         // console.log('catch--',err);
-        this.setState({ readyToRedirect: false, disableButton:false,openSnackbar: true,
-          message: 'Server error ('+err+').' });
+        this.setState({
+          readyToRedirect: false,
+          disableButton: false,
+          openSnackbar: true,
+          message: "Server error (" + err + ").",
+        });
       });
   }
 
   componentDidMount() {
     let message = "";
-    if (this.props.location.state && this.props.location.state.message)  {
+    if (this.props.location.state && this.props.location.state.message) {
       message = this.props.location.state.message;
       this.setState({
         openSnackbar: true,
-        message: message
+        message: message,
       });
     }
 
-    fetch("http://54.202.120.56:7000/api/organizations/?format=select")
-      .then(results => results.json())
-      .then(organizations => {
-        organizations.unshift({id:0,name:'Select Organization'})
+    fetch(ORGANIZATION_SELECT_API_URL)
+      .then((results) => results.json())
+      .then((organizations) => {
+        organizations.unshift({ id: 0, name: "Select Organization" });
         this.setState({ organizations });
       });
   }
 
-
   showMessages = (message) => {
     // alert(message);
-    this.setState( {
+    this.setState({
       openSnackbar: true,
-      message: message
+      message: message,
     });
   };
 
@@ -153,11 +167,9 @@ class ClientOrg extends React.Component {
     this.setState({ openSnackbar: false });
   };
 
-  handleClick = Transition => () => {
+  handleClick = (Transition) => () => {
     this.setState({ openSnackbar: true, Transition });
   };
-
-
 
   render() {
     const { classes } = this.props;
@@ -170,7 +182,7 @@ class ClientOrg extends React.Component {
     return (
       <React.Fragment>
         <CssBaseline />
-        <Topbar currentPath={currentPath}/>
+        <Topbar currentPath={currentPath} />
         <form onSubmit={this.handleSubmit} noValidate>
           <div className={classes.root}>
             <Grid container justify="center">
@@ -193,29 +205,31 @@ class ClientOrg extends React.Component {
                       >
                         Select client organization
                       </Typography>
-                        <FormControl className={classes.formControl} style={{width:"100%"}}>
-                          <InputLabel shrink htmlFor="org-simple">
-                          </InputLabel>
-                          <Select
-                            value={this.state.orgId}
-                            onChange={this.handleSelectChange}
-                            inputProps={{
-                              name: "orgId",
-                              id: "org-simple"
-                            }}
-                          >
-                            {this.state.organizations.map(org => {
-                              return (
-                                <MenuItem key={org.id} value={org.id}>
-                                  {org.name}
-                                </MenuItem>
-                              );
-                            })}
-                          </Select>
-                        </FormControl>
-                        <br />
-                        <br />
-                        <br />
+                      <FormControl
+                        className={classes.formControl}
+                        style={{ width: "100%" }}
+                      >
+                        <InputLabel shrink htmlFor="org-simple"></InputLabel>
+                        <Select
+                          value={this.state.orgId}
+                          onChange={this.handleSelectChange}
+                          inputProps={{
+                            name: "orgId",
+                            id: "org-simple",
+                          }}
+                        >
+                          {this.state.organizations.map((org) => {
+                            return (
+                              <MenuItem key={org.id} value={org.id}>
+                                {org.name}
+                              </MenuItem>
+                            );
+                          })}
+                        </Select>
+                      </FormControl>
+                      <br />
+                      <br />
+                      <br />
                       <Typography variant="h5" component="h2">
                         <div className={classes.spaceTop}>
                           <br />
@@ -235,14 +249,14 @@ class ClientOrg extends React.Component {
                 </Grid>
               </Grid>
               <Snackbar
-              open={this.state.openSnackbar}
-              onClose={this.handleClose}
-              TransitionComponent={this.state.Transition}
-              ContentProps={{
-                "aria-describedby": "message-id"
-              }}
-              message={<span id="message-id">{this.state.message}</span>}
-            />
+                open={this.state.openSnackbar}
+                onClose={this.handleClose}
+                TransitionComponent={this.state.Transition}
+                ContentProps={{
+                  "aria-describedby": "message-id",
+                }}
+                message={<span id="message-id">{this.state.message}</span>}
+              />
             </Grid>
           </div>
         </form>

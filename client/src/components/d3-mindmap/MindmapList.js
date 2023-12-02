@@ -39,6 +39,7 @@ import SectionHeader from "../typo/SectionHeader";
 import Skeleton from 'react-loading-skeleton';
 import DeleteMindmapDialog from '../dialogs/DeleteMindmapDialog';
 import PageTitle from '../PageTitle';
+import { API_BASE_URL } from "../../config/apiUrl";
 
 const rows = [
   
@@ -182,7 +183,7 @@ class MindmapList extends Component {
       });
     }
 
-    fetch("/api/mindmaps-list/" + getOrgId())
+    fetch(API_BASE_URL + "/api/mindmaps-list/" + getOrgId())
       .then(res => {
         this.setState({skeletonLoader:false})
         return res.json();

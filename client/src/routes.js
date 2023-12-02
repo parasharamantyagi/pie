@@ -56,8 +56,8 @@ export default props => (
     <ScrollToTop>
       <Switch>
         <Route exact path="/dashboard" component={withAuth(ProjectDashboard)} />
-        <Route exact path="/analytics-dashboard" component={withAuth(AnalyticsDashboard)} />
-        <Route exact path="/paneldashboard" component={withAuth(PanelDashboard)} />
+        <Route exact path="/analytics-dashboard" component={AnalyticsDashboard} />
+        <Route exact path="/paneldashboard" component={PanelDashboard} />
         <Route exact path="/orgdashboard" component={OrgDashboard} />
         <Route exact path="/highlight" component={withAuth(HighlightDashboard)} />
         <Route exact path="/logout" component={Logout} />
@@ -95,7 +95,7 @@ export default props => (
         <Route exact path="/milestone" component={withAuth(Milestone)} />
         <Route exact path="/action/:id" component={withAuth(Action)} />
         <Route exact path="/action" component={withAuth(Action)} />
-        <Route exact path="/mindmaplist" component={withAuth(MindMapList)} />
+        <Route exact path="/mindmaplist" component={MindMapList} />
         <Route exact path="/listpersons" component={withAuth(ListPersons)} />
         <Route exact path="/listkpis" component={withAuth(ListKpis)} />
         <Route exact path="/listorgs" component={withAuth(ListOrgs)} />

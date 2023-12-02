@@ -15,6 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton/index";
 import {Redirect} from "react-router-dom";
+import { FT_SEARCH_API_URL } from "../../config/apiUrl";
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -152,7 +153,7 @@ class SearchResults extends React.Component {
     // Search against our fulltext index.
     const orgId = getOrgId();
     if (searchString !== "" && searchString !== this.state.lastSearchString) {
-      fetch("http://54.202.120.56:7000/api/ft-search", {
+      fetch(FT_SEARCH_API_URL, {
         method: "GET",
         headers: new Headers({
           term: searchString,
