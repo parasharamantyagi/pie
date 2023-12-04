@@ -15,7 +15,7 @@ import ActionWidget from "./widgets/ActionWidget";
 import ActionNewVsCloseWidget from "./widgets/ActionNewVsCloseWidget";
 import MileStonePriorityWidget from "./widgets/MileStonePriorityWidget";
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { ORGANIZATION_PROJECT_STATUS_API_URL } from "../../config/apiUrl";
+import { ORGANIZATION_PROJECT_ACTION_NEW_VS_CLOSE_API_URL, ORGANIZATION_PROJECT_ACTION_STATUS_API_URL, ORGANIZATION_PROJECT_STATUS_API_URL } from "../../config/apiUrl";
 
 class AnalyticsDashboard extends Component {
   constructor(props) {
@@ -50,7 +50,7 @@ class AnalyticsDashboard extends Component {
     const orgProjectStatus = await res.json();
     this.setState({orgProjectStatus});
 
-    const res2 = await fetch(`/api/orgnization-project-action-status/${orgId}`);
+    const res2 = await fetch(ORGANIZATION_PROJECT_ACTION_STATUS_API_URL+orgId);
     const orgProjectActionStatus = await res2.json();
     this.setState({orgProjectActionStatus});
 
@@ -58,7 +58,7 @@ class AnalyticsDashboard extends Component {
     //const orgProjectMilstoneReponse = await res3.json();
     //this.setState({orgProjectMilstoneStatus:orgProjectMilstoneReponse.progressData,orgProjectMilstonePriority:orgProjectMilstoneReponse.priorityData});
 
-    const res4 = await fetch(`/api/orgnization-project-action-new-vs-close/${orgId}`);
+    const res4 = await fetch(ORGANIZATION_PROJECT_ACTION_NEW_VS_CLOSE_API_URL + orgId);
     const actionNewVsClose = await res4.json();
     this.setState({actionNewVsClose});
 

@@ -79,7 +79,7 @@ module.exports = {
     //   order by P.fullName";
 
     let sql = "select P.id, P.fullName, P.email, P.role, P.orgId, \
-              D.name as department, getProjectListForPerson(P.id) as projects \
+              D.name as department, P.id as projects \
               from Persons P \
               left outer join Departments D on P.deptId = D.id \
               where (P.orgId = " + orgId + "  \

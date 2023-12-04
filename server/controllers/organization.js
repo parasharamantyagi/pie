@@ -125,7 +125,7 @@ module.exports = {
       "' IN NATURAL LANGUAGE MODE) > 0.0 " +
       "and O.id = S.orgId " +
       "and S.active = 1";
-    if(orgId){
+    if (orgId) {
       sql += " and orgId = " + orgId;
     }
     sql += " order by score desc";
@@ -415,6 +415,13 @@ module.exports = {
                     where pa.disabled=0 and p.active=1 and pa.status ='Completed' and p.orgId=${req.params.id}
                     group by MONTHNAME(pa.updatedAt) order by pa.updatedAt`;
     try {
+      // models.sequelize.query(
+      //   "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))",
+      //   {
+      //     type: models.sequelize.QueryTypes.SELECT,
+      //   }
+      // );
+
       const newResult = await models.sequelize.query(newSql, {
         type: models.sequelize.QueryTypes.SELECT,
       });

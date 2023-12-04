@@ -46,7 +46,7 @@ import OrganizationMemberAction from "../organization/OrganizationMemberAction";
 import DatePicker from "react-datepicker";
 
 import "../../stylesheets/react-datepicker.css";
-import { API_BASE_URL } from "../../config/apiUrl";
+import { API_BASE_URL, ORGANIZATION_ACTION_PERSONS_API_URL } from "../../config/apiUrl";
 
 const rows = [
   {
@@ -206,7 +206,7 @@ class OrganizationActionTable extends React.Component {
   }
 
   fetchPersons(orgId, OrganizationActions) {
-    fetch(`/api/organization-action-persons/${orgId}`)
+    fetch(ORGANIZATION_ACTION_PERSONS_API_URL + orgId)
       .then((res) => res.json())
       .then((response) => {
         const _persons = [];
@@ -247,7 +247,7 @@ class OrganizationActionTable extends React.Component {
   };
 
   meetingsDays() {
-    fetch(`/api/action-organization-meeting-days/${this.state.orgId}`)
+    fetch(`${API_BASE_URL}/api/action-organization-meeting-days/${this.state.orgId}`)
       .then((res) => res.json())
       .then((response) => {
         const highlightDates = [];
