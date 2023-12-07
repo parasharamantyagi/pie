@@ -36,6 +36,7 @@ import ccss from "../custom.css";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Snackbar from "@material-ui/core/Snackbar";
 import DeleteProjectDialog from '../dialogs/DeleteProjectDialog';
+import { PROJECTS_FILTERED_API_URL } from "../../config/apiUrl";
 
 
 const divStyle = {
@@ -109,7 +110,6 @@ class ProjectPanelList extends Component {
   }
 
   fetchProjects = () => {
-    let fetchUrl = "/api/projects-filtered";
 
     let orgId = getOrgId();
     if (parseInt(orgId) > 0) {
@@ -125,7 +125,7 @@ class ProjectPanelList extends Component {
         // Use the props for the body of the fetch request.
         const reqBody = {statusFilter, startYearFilter, endYearFilter, allClients, orgId, userId};
 
-        fetch(fetchUrl, {
+        fetch(PROJECTS_FILTERED_API_URL, {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify(reqBody)

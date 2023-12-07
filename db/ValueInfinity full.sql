@@ -543,7 +543,7 @@ create or replace definer = viadmin@`%` view vw_SearchData as select `mvp2`.`Pro
                                     ''                          AS `project`,
                                     'Persons'                   AS `source`
                              from `mvp2`.`Persons`;
-
+ALTER TABLE `Tasks` ADD `status` VARCHAR(200) NULL DEFAULT NULL AFTER `description`;
 create or replace definer = viadmin@`%` view vw_Tasks as select `T`.`id`                                     AS `id`,
        `T`.`projectId`                              AS `projectId`,
        `T`.`assignedTo`                             AS `assignedTo`,

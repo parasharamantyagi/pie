@@ -569,7 +569,7 @@ module.exports = {
 
       // Updated SQL using a new function, getTopTasks().
       let sql = "select P.id,P.active, P.orgId, P.title as `projectTitle`, PS.label as `status`,K.id as `mainKpiId`, K.title as `mainKpi`, O.name as organization, \
-        P.progress, P.startAt, P.endAt, json_array(getTopTasks(3, P.id)) as tasks, \
+        P.progress, P.startAt, P.endAt, \
         (select group_concat(concat(' ', Per.firstName, ' ', Per.lastName) ORDER BY Per.firstName ASC) from ProjectPersons PP, Persons Per  \
         where P.id = PP.projectId and Per.id = PP.personId and PP.owner = '1' and Per.disabled = 0) as owners, \
         (select group_concat(concat(' ', Per.firstName, ' ', Per.lastName) ORDER BY Per.firstName ASC) from ProjectPersons PP, Persons Per  \

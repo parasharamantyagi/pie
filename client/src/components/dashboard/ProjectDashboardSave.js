@@ -31,6 +31,7 @@ import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import { PROJECTS_FILTERED_API_URL } from "../../config/apiUrl";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -262,7 +263,7 @@ class ProjectDashboard extends Component {
   handleUpdate = (event) => {
     event.preventDefault();
     setTimeout(() => {
-      fetch("/api/projects-filtered", {
+      fetch(PROJECTS_FILTERED_API_URL, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(this.state)

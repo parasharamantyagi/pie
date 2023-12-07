@@ -10,7 +10,7 @@
  * Editor:   Brad Kaufman
  */
 import React, { Component } from "react";
-import {setUser, store} from "../redux";
+import { getUser, setUser, store } from "../redux";
 import { API_BASE_URL } from "../config/apiUrl";
 
 export default function withAuth(ComponentToProtect) {
@@ -24,24 +24,26 @@ export default function withAuth(ComponentToProtect) {
     }
 
     componentDidMount() {
-      fetch(API_BASE_URL + "/api/auth/validate")
+      const userData = getUser();
+      console.log('userData userData', userData);
+      fetch(API_BASE_URL + "/api/auth/validate", { headers: { authorization: userData.token } })
         .then(res => {
           if (res.status !== 200) {
             this.redirectToLogin();
           }
-        }) .catch(err => {
+        }).catch(err => {
           console.error(err);
           store.dispatch(setUser(JSON.stringify("")));
           this.redirectToLogin();
         });
     }
 
-    redirectToLogin(){
-      if(window.location.pathname!='' && window.location.pathname!='/'){
+    redirectToLogin() {
+      if (window.location.pathname != '' && window.location.pathname != '/') {
         store.dispatch(setUser(JSON.stringify("")));
         localStorage.clear();
         sessionStorage.clear();
-        // window.location.assign('/?returnUrl='+window.location.pathname)
+        window.location.assign('/?returnUrl=' + window.location.pathname)
       }
     }
     render() {

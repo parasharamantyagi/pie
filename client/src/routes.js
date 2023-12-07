@@ -57,7 +57,7 @@ export default props => (
       <Switch>
         <Route exact path="/dashboard" component={withAuth(ProjectDashboard)} />
         <Route exact path="/analytics-dashboard" component={AnalyticsDashboard} />
-        <Route exact path="/paneldashboard" component={PanelDashboard} />
+        <Route exact path="/paneldashboard" component={withAuth(PanelDashboard)} />
         <Route exact path="/orgdashboard" component={OrgDashboard} />
         <Route exact path="/highlight" component={withAuth(HighlightDashboard)} />
         <Route exact path="/logout" component={Logout} />

@@ -20,6 +20,7 @@ import DashboardFilter from "./DashboardFilter";
 import ProjectPanelList from "./ProjectPanelList";
 import PageTitle from "../PageTitle";
 import { getOrgName } from "../../redux";
+import { PROJECTS_FILTERED_API_URL } from "../../config/apiUrl";
 var msg = "";
 
 class ProjectDashboard extends Component {
@@ -109,7 +110,7 @@ class ProjectDashboard extends Component {
   handleUpdate = (event) => {
     event.preventDefault();
     setTimeout(() => {
-      fetch("/api/projects-filtered", {
+      fetch(PROJECTS_FILTERED_API_URL, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(this.state)

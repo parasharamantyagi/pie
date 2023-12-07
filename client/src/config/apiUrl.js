@@ -13,4 +13,5 @@ module.exports = {
   ORGANIZATION_PROJECT_ACTION_NEW_VS_CLOSE_API_URL: api + "/api/orgnization-project-action-new-vs-close/",
   ORGANIZATION_ACTION_PERSONS_API_URL: api + "/api/organization-action-persons/",
   MIND_MAPS_LIST_API_URL: api + "/api/orgnization-project-status/",
+  PROJECTS_FILTERED_API_URL: api + "/api/projects-filtered",
 };

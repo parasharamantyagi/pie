@@ -114,17 +114,21 @@ module.exports = {
     );
     logger.debug(`Organization fulltextSearch -> orgId: ${orgId}`);
 
+    // let sql =
+    //   "SELECT S.id, S.orgId, S.foreignId, O.name as OrgName, S.title, S.description, S.project, S.source, " +
+    //   "MATCH(title, description, summary) AGAINST ('" +
+    //   searchTerm +
+    //   "' IN NATURAL LANGUAGE MODE) AS score " +
+    //   "FROM SearchData S, Organizations O " +
+    //   "where MATCH(title, description, summary) AGAINST ('" +
+    //   searchTerm +
+    //   "' IN NATURAL LANGUAGE MODE) > 0.0 " +
+    //   "and O.id = S.orgId " +
+    //   "and S.active = 1";
     let sql =
-      "SELECT S.id, S.orgId, S.foreignId, O.name as OrgName, S.title, S.description, S.project, S.source, " +
-      "MATCH(title, description, summary) AGAINST ('" +
+      "SELECT S.id, S.orgId, S.foreignId, O.name as OrgName, S.title, S.description, S.project, S.source, CONCAT(title, description, summary) AS score FROM SearchData S, Organizations O where (CONCAT(title, description, summary) LIKE '%" +
       searchTerm +
-      "' IN NATURAL LANGUAGE MODE) AS score " +
-      "FROM SearchData S, Organizations O " +
-      "where MATCH(title, description, summary) AGAINST ('" +
-      searchTerm +
-      "' IN NATURAL LANGUAGE MODE) > 0.0 " +
-      "and O.id = S.orgId " +
-      "and S.active = 1";
+      "%') and O.id = S.orgId and S.active = 1";
     if (orgId) {
       sql += " and orgId = " + orgId;
     }
